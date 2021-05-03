@@ -9,7 +9,7 @@ def main():
     block_list = requests.get('https://v.firebog.net/hosts/csv.txt')
     SUCCESS_FLAG = True
     if block_list.status_code != 200:
-        logging.error('Couldnt connect to URL -- exiting scirpt')
+        logging.error("Error connect to URL -- exiting scirpt')
         quit()
 
     COLUMNS = ['category','ticktype','source repo','description','source URL']
