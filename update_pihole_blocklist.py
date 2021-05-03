@@ -1,4 +1,6 @@
-#run as Sudo
+#Based on list of URL's available at https://v.firebog.net/hosts/csv.txt marked with "tick"
+#Author: James Romeo
+#Run script as Sudo
 import requests, csv, sqlite3, os, logging
 
 def main():
