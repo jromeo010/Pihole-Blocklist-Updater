@@ -21,7 +21,7 @@ def main():
 
     block_list = block_list.read().decode('utf-8')
     COLUMNS = ['category','ticktype','source repo','description','source URL']
-    records = csv.DictReader(block_list.text.splitlines(),fieldnames=COLUMNS)
+    records = csv.DictReader(block_list.splitlines(),fieldnames=COLUMNS)
 
     try:
         con = sqlite3.connect('/etc/pihole/gravity.db')
