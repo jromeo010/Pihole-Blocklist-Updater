@@ -1,17 +1,25 @@
 #Based on list of URL's available at https://v.firebog.net/hosts/csv.txt marked with "tick"
 #Author: James Romeo
 #Run script as Sudo
-import requests, csv, sqlite3, os, logging
+import csv
+import sqlite3
+import os
+import logging
+from urllib import request
 
 def main():
 
     logging.basicConfig(level=logging.INFO, format='%(asctime)s -  %(levelname)s -  %(message)s',filename='pihole_update.log')
-    block_list = requests.get('https://v.firebog.net/hosts/csv.txt')
+
+    block_list = request.urlopen("https://v.firebog.net/hosts/csv.txt")
+
     SUCCESS_FLAG = True
-    if block_list.status_code != 200:
+    if block_list.getcode() != 200:
         logging.error("Error connect to URL -- exiting scirpt")
+        SUCCESS_FLAG = False
         quit()
 
+    block_list = block_list.read().decode('utf-8')
     COLUMNS = ['category','ticktype','source repo','description','source URL']
     records = csv.DictReader(block_list.text.splitlines(),fieldnames=COLUMNS)
 
